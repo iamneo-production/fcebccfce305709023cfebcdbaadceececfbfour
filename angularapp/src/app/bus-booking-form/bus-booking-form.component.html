@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="form-container" style="background-color: #cfaeae; padding: 20px; border-radius: 10px;">
+      <h2>Bus Booking Form</h2>
+      <form [formGroup]="bookingForm" (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" formControlName="name" placeholder="Enter your name">
+          <div *ngIf="bookingForm.get('name')?.hasError('required') && bookingForm.get('name')?.touched" class="error-message">
+            Name is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+          <div *ngIf="bookingForm.get('email')?.hasError('required') && bookingForm.get('email')?.touched" class="error-message">
+            Email is required.
+          </div>
+          <div *ngIf="bookingForm.get('email')?.hasError('email') && bookingForm.get('email')?.touched" class="error-message">
+            Please enter a valid email address.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="passengers">Passengers</label>
+          <input type="number" id="passengers" formControlName="passengers" placeholder="Enter number of passengers">
+          <div *ngIf="bookingForm.get('passengers')?.hasError('required') && bookingForm.get('passengers')?.touched" class="error-message">
+            Number of passengers is required.
+          </div>
+          <div *ngIf="bookingForm.get('passengers')?.hasError('min') && bookingForm.get('passengers')?.touched" class="error-message">
+            Minimum number of passengers is 1.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="departureDate">Departure Date</label>
+          <input type="date" id="departureDate" formControlName="departureDate">
+        </div>
+        <div class="form-group">
+          <label for="destination">Destination</label>
+          <input type="text" id="destination" formControlName="destination" placeholder="Enter your destination">
+        </div>
+        <div class="form-group">
+          <label for="seatType">Seat Type</label>
+          <select id="seatType" formControlName="seatType">
+            <option value="" disabled>Select seat type</option>
+            <option value="standard">Standard</option>
+            <option value="premium">Premium</option>
+            <option value="luxury">Luxury</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="busType">Bus Type</label>
+          <select id="busType" formControlName="busType">
+            <option value="" disabled>Select bus type</option>
+            <option value="sleeper">Sleeper</option>
+            <option value="semi-sleeper">Semi-Sleeper</option>
+            <option value="volvo">Volvo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" formControlName="gender">
+            <option value="" disabled>Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+  
+        <button type="submit" [disabled]="!bookingForm.valid">Book Now</button>
+        <button type="reset" (click)="resetForm()">Reset Form</button>
+      </form>
+  
+      <div *ngIf="showSuccessMessage" class="success-message">
+        Booking successful! Thank you for choosing our service.
+      </div>
+    </div>
+  </div>
+  
